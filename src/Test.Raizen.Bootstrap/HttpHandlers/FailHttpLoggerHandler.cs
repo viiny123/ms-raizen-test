@@ -3,27 +3,26 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Test.Raizen.Bootstrap.HttpHandlers
+namespace Test.Raizen.Bootstrap.HttpHandlers;
+
+public class FailHttpLoggerHandler : DelegatingHandler
 {
-    public class FailHttpLoggerHandler : DelegatingHandler
+    private readonly ILogger logger;
+
+    public FailHttpLoggerHandler(ILogger<FailHttpLoggerHandler> logger)
     {
-        private readonly ILogger logger;
+        this.logger = logger;
+    }
 
-        public FailHttpLoggerHandler(ILogger<FailHttpLoggerHandler> logger)
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        var response = await base.SendAsync(request, cancellationToken);
+
+        if (!response.IsSuccessStatusCode)
         {
-            this.logger = logger;
+            logger.LogTrace($"Url called: {request.RequestUri}, StatusCode: {response.StatusCode}, ResponseBody: {await response.Content.ReadAsStringAsync(cancellationToken)}");
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
-            var response = await base.SendAsync(request, cancellationToken);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                logger.LogTrace($"Url called: {request.RequestUri}, StatusCode: {response.StatusCode}, ResponseBody: {await response.Content.ReadAsStringAsync(cancellationToken)}");
-            }
-
-            return response;
-        }
+        return response;
     }
 }

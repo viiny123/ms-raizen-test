@@ -24,14 +24,11 @@ public static class ServicesConfiguration
 
     public static IApplicationBuilder Configure(this IApplicationBuilder app, IConfiguration configuration)
     {
-        app.UseAllElasticApm(configuration);
-
         app.ConfigureMiddlewares();
         app.ConfigureMvc();
         app.ConfigureHealthCheck();
         app.UseAuthorization();
         app.RunMigrations();
-        app.AddTestData();
 
         return app;
     }

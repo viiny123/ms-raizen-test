@@ -1,20 +1,19 @@
 using System.Threading.Tasks;
 using Test.Raizen.Domain.Base;
 
-namespace Test.Raizen.Data.Base
+namespace Test.Raizen.Data.Base;
+
+public class UnitOfWork : IUnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    private readonly TestDbContext context;
+
+    public UnitOfWork(TestDbContext context)
     {
-        private readonly TestDbContext context;
+        this.context = context;
+    }
 
-        public UnitOfWork(TestDbContext context)
-        {
-            this.context = context;
-        }
-
-        public async Task SaveAsync()
-        {
-            await context.SaveChangesAsync();
-        }
+    public async Task SaveAsync()
+    {
+        await context.SaveChangesAsync();
     }
 }

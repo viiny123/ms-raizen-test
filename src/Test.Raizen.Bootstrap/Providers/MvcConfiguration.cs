@@ -5,32 +5,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Raizen.Bootstrap.Providers.Options;
 
-namespace Test.Raizen.Bootstrap.Providers
+namespace Test.Raizen.Bootstrap.Providers;
+
+[ExcludeFromCodeCoverage]
+public static class MvcConfiguration
 {
-    [ExcludeFromCodeCoverage]
-    public static class MvcConfiguration
+    public static IServiceCollection ConfigureMvcServices(this IServiceCollection services)
     {
-        public static IServiceCollection ConfigureMvcServices(this IServiceCollection services)
-        {
-            services.AddControllers();
-            services.Configure<JsonOptions>(options => options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never);
-            services.AddControllers()
-                    .AddJsonOptions(options =>
-                        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-            services.AddRouting(options => options.LowercaseUrls = true);
-            services.Configure<MvcOptions>(options =>
-                options.Conventions.Add(new VersionPrefixConventionOption()));
+        services.AddControllers();
+        services.Configure<JsonOptions>(options => options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never);
+        services.AddControllers()
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+        services.AddRouting(options => options.LowercaseUrls = true);
+        services.Configure<MvcOptions>(options =>
+            options.Conventions.Add(new VersionPrefixConventionOption()));
 
-            return services;
-        }
+        return services;
+    }
 
-        public static IApplicationBuilder ConfigureMvc(this IApplicationBuilder app)
-        {
-            app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+    public static IApplicationBuilder ConfigureMvc(this IApplicationBuilder app)
+    {
+        app.UseHttpsRedirection();
+        app.UseRouting();
+        app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-            return app;
-        }
+        return app;
     }
 }

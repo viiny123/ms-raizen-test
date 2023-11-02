@@ -3,21 +3,20 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace Test.Raizen.CrossCutting.Extensions
+namespace Test.Raizen.CrossCutting.Extensions;
+
+public static class EnumExtension
 {
-    public static class EnumExtension
+    public static string GetDescription(this Enum value)
     {
-        public static string GetDescription(this Enum value)
-        {
-            var enumMember = value.GetType().GetMember(value.ToString()).FirstOrDefault();
-            var descriptionAttribute =
-                enumMember == null
-                    ? default
-                    : enumMember.GetCustomAttribute(typeof(DescriptionAttribute)) as DescriptionAttribute;
-            return
-                descriptionAttribute == null
-                    ? value.ToString()
-                    : descriptionAttribute.Description;
-        }
+        var enumMember = value.GetType().GetMember(value.ToString()).FirstOrDefault();
+        var descriptionAttribute =
+            enumMember == null
+                ? default
+                : enumMember.GetCustomAttribute(typeof(DescriptionAttribute)) as DescriptionAttribute;
+        return
+            descriptionAttribute == null
+                ? value.ToString()
+                : descriptionAttribute.Description;
     }
 }

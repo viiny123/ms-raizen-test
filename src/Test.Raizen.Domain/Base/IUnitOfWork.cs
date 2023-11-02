@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
 
-namespace Test.Raizen.Domain.Base
+namespace Test.Raizen.Domain.Base;
+
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        Task SaveAsync();
-    }
+    Task SaveAsync();
 }

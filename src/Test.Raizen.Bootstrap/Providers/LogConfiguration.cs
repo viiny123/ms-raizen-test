@@ -28,7 +28,6 @@ public static class LogConfiguration
             .Filter.ByIncludingOnly(x =>
                 !x.Properties.TryGetValue("RequestPath", out var path) ||
                 !path.ToString().Contains("/ping"))
-            .WriteTo.Console()
             .ReadFrom.Configuration(config);
 
         Log.Logger = loggerConfiguration.CreateLogger();

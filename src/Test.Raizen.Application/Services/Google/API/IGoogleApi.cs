@@ -2,11 +2,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Refit;
 
-namespace Test.Raizen.Application.Services.Google.API
+namespace Test.Raizen.Application.Services.Google.API;
+
+public interface IGoogleApi
 {
-    public interface IGoogleApi
-    {
-        [Get("/")]
-        public Task<HttpResponseMessage> GetGoogleAsync();
-    }
+    [Get("/")]
+    public Task<HttpResponseMessage> GetGoogleAsync();
 }

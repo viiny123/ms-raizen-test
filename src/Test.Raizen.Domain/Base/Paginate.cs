@@ -1,48 +1,48 @@
 using System;
 using System.Collections.Generic;
 
-namespace Test.Raizen.Domain.Base
+namespace Test.Raizen.Domain.Base;
+
+public class Paginate<T> where T : class
 {
-    public class Paginate<T> where T : class
+    private readonly int DefaultPageSize;
+
+    public int PageSize { get; set; }
+    public int PageNumber { get; set; }
+    public long TotalCount { get; set; }
+    public long TotalPage { get; set; }
+    public IEnumerable<T> PageData { get; set; }
+
+    public Paginate(int defaultSize = 10)
     {
-        private readonly int DefaultPageSize;
+        PageSize = defaultSize;
+        PageNumber = 1;
+        PageData = new List<T>();
+        DefaultPageSize = defaultSize;
+    }
 
-        public int PageSize { get; set; }
-        public int PageNumber { get; set; }
-        public long TotalCount { get; set; }
-        public long TotalPage { get; set; }
-        public IEnumerable<T> PageData { get; set; }
+    public Paginate(int pageSize,
+        int pageNumber,
+        long totalCount,
+        long totalPage,
+        IEnumerable<T> items)
+    {
+        PageSize = pageSize;
+        PageNumber = pageNumber;
+        TotalCount = totalCount;
+        TotalPage = totalPage;
+    }
 
-        public Paginate(int defaultSize = 10)
-        {
-            PageSize = defaultSize;
-            PageNumber = 1;
-            PageData = new List<T>();
-            DefaultPageSize = defaultSize;
-        }
+    public int GetSkip()
+    {
+        return (PageNumber - 1) * PageSize;
+    }
 
-        public Paginate(int pageSize,
-            int pageNumber,
-            long totalCount,
-            long totalPage)
-        {
-            PageSize = pageSize;
-            PageNumber = pageNumber;
-            TotalCount = totalCount;
-            TotalPage = totalPage;
-        }
+    public long GetTotalPage()
+    {
+        var totalPages = (double)TotalCount / PageSize;
+        var roundedTotalPages = (long)Math.Ceiling(totalPages);
 
-        public int GetSkip()
-        {
-            return (PageNumber - 1) * PageSize;
-        }
-
-        public long GetTotalPage()
-        {
-            var totalPages = (double)TotalCount / PageSize;
-            var roundedTotalPages = (long)Math.Ceiling(totalPages);
-
-            return roundedTotalPages;
-        }
+        return roundedTotalPages;
     }
 }

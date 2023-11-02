@@ -1,20 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace Test.Raizen.Domain.Base
+namespace Test.Raizen.Domain.Base;
+
+public interface IRepositoryBase<TEntity> where TEntity : EntityBase<TEntity>
 {
-    public interface IRepositoryBase<TEntity>
-    {
-        Task<TEntity> GetById(Guid id);
-
-        Task<IEnumerable<TEntity>> GetAll(IEnumerable<Expression<Func<TEntity, bool>>> predicates);
-
-        Task Add(TEntity entity);
-
-        void Update(TEntity entity);
-
-        void Delete(TEntity entity);
-    }
+    DbSet<TEntity> GetDbSet();
+    IQueryable<TEntity> GetDbSetQuery();
+    Task<TEntity> FindAsync(Guid key);
+    Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> expression);
+    Task AddAsync(TEntity entity);
+    Task AddListAsync(IEnumerable<TEntity> entities);
+    Task UpdateListAsync(IEnumerable<TEntity> entities);
+    Task UpdateAsync(TEntity entity);
+    Task RemoveAsync(TEntity entity);
+    Task RemoveRangeAsync(IEnumerable<TEntity> entities);
 }

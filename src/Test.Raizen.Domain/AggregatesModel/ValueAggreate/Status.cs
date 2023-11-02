@@ -1,8 +1,7 @@
-namespace Test.Raizen.Domain.AggregatesModel.ValueAggreate
+namespace Test.Raizen.Domain.AggregatesModel.ValueAggreate;
+
+public enum Status
 {
-    public enum Status
-    {
-        Active = 1,
-        Inactive
-    }
+    Active = 1,
+    Inactive
 }

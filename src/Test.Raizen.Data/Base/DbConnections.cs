@@ -1,7 +1,6 @@
-namespace Test.Raizen.Data.Base
+namespace Test.Raizen.Data.Base;
+
+public enum DbConnections
 {
-    public enum DbConnections
-    {
-        DEFAULT_CONNECTION
-    }
+    DEFAULT_CONNECTION
 }

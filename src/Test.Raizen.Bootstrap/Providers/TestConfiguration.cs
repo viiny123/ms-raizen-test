@@ -16,7 +16,7 @@ public static class TestConfiguration
         IConfiguration configuration)
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IValueRepository, ValueRepository>();
+        services.AddScoped<IPersonRepository, PersonRepository>();
         services.AddTransient<FailHttpLoggerHandler>();
 
         return services;

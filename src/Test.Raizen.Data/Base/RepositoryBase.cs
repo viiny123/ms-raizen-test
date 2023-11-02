@@ -1,68 +1,73 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Test.Raizen.Domain.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace Test.Raizen.Data.Base
+namespace Test.Raizen.Data.Base;
+
+public abstract class RepositoryBase<TContext, TEntity> : IRepositoryBase<TEntity>
+    where TEntity : EntityBase<TEntity>
+    where TContext : DbContext
 {
-    public abstract class RepositoryBase<TContext, TEntity> : IRepositoryBase<TEntity>
-        where TEntity : EntityBase<TEntity>
-        where TContext : DbContext
+    private readonly DbSet<TEntity> _dbSet;
+
+    protected RepositoryBase(TContext context)
     {
-        internal readonly Func<DbConnections, IDbConnection> dbConnectionFactory;
-        internal TContext context;
-        internal DbSet<TEntity> DbSet;
+        _dbSet = context.Set<TEntity>();
+    }
 
-        protected RepositoryBase(TContext context,
-            Func<DbConnections, IDbConnection> dbConnectionFactory)
-        {
-            this.context = context;
-            this.dbConnectionFactory = dbConnectionFactory;
-            DbSet = this.context.Set<TEntity>();
-        }
+    public virtual DbSet<TEntity> GetDbSet() => _dbSet;
 
-        protected RepositoryBase(Func<DbConnections, IDbConnection> dbConnectionFactory)
-        {
-            this.dbConnectionFactory = dbConnectionFactory;
-        }
+    public virtual IQueryable<TEntity> GetDbSetQuery() => _dbSet?.AsNoTracking();
 
-        public async Task<TEntity> GetById(Guid id)
-        {
-            return await context.Set<TEntity>()
-                .FindAsync(id);
-        }
+    public virtual async Task<TEntity> FindAsync(Guid key)
+    {
+        return await GetDbSet().FindAsync(key);
+    }
 
-        public async Task<IEnumerable<TEntity>> GetAll(IEnumerable<Expression<Func<TEntity, bool>>> predicates)
-        {
-            var queryableEntity = context.Set<TEntity>()
-                .AsQueryable();
+    public virtual async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> expression)
+    {
+        return await GetDbSet().FirstOrDefaultAsync(expression);
+    }
 
-            foreach (var predicate in predicates)
-            {
-                queryableEntity = queryableEntity.Where(predicate);
-            }
+    public virtual async Task AddAsync(TEntity entity)
+    {
+        await GetDbSet().AddAsync(entity);
+    }
 
-            return await queryableEntity.ToListAsync();
-        }
+    public virtual async Task AddListAsync(IEnumerable<TEntity> entities)
+    {
+        await GetDbSet().AddRangeAsync(entities);
+    }
 
-        public async Task Add(TEntity entity)
-        {
-            await context.Set<TEntity>().AddAsync(entity);
-        }
+    public virtual Task UpdateListAsync(IEnumerable<TEntity> entities)
+    {
+        GetDbSet().UpdateRange(entities);
 
-        public void Update(TEntity entity)
-        {
-            context.Entry(entity).State = EntityState.Modified;
-        }
+        return Task.CompletedTask;
+    }
 
-        public void Delete(TEntity entity)
-        {
-            context.Set<TEntity>().Remove(entity);
-        }
+    public virtual Task UpdateAsync(TEntity entity)
+    {
+        GetDbSet().Update(entity);
 
+        return Task.CompletedTask;
+    }
+
+    public virtual Task RemoveAsync(TEntity entity)
+    {
+        GetDbSet().Remove(entity);
+
+        return Task.CompletedTask;
+    }
+
+    public virtual Task RemoveRangeAsync(IEnumerable<TEntity> entities)
+    {
+        GetDbSet().RemoveRange(entities);
+
+        return Task.CompletedTask;
     }
 }
