@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Arbi.Template.API": {
+    "Test.Raizen.API": {
       "commandName": "Project",
       "launchBrowser": false,
       "environmentVariables": {
