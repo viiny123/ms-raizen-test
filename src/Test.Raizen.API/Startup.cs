@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Test.Raizen.Bootstrap;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,8 +22,8 @@ public class Startup
         services.ConfigureServices(Configuration);
     }
 
-    public void Configure(IApplicationBuilder app)
+    public void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider provider)
     {
-        app.Configure(Configuration);
+        app.Configure(Configuration, provider);
     }
 }

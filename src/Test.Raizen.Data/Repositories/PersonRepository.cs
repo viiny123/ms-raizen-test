@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Test.Raizen.Domain.AggregatesModel.ValueAggreate;
 using Test.Raizen.Data.Base;
@@ -17,12 +18,12 @@ public class PersonRepository : RepositoryBase<TestDbContext, Person>, IPersonRe
 
         if (string.IsNullOrWhiteSpace(personQueryDto.Name) is false)
         {
-            query = query.Where(x => x.Name == personQueryDto.Name);
+            query = query.Where(x => x.Name.ToLower() == personQueryDto.Name.ToLower());
         }
 
         if (string.IsNullOrWhiteSpace(personQueryDto.Email) is false)
         {
-            query = query.Where(x => x.Email == personQueryDto.Email);
+            query = query.Where(x => x.Email.ToLower() == personQueryDto.Email.ToLower());
         }
 
         query = query.OrderBy(x => x.Name);

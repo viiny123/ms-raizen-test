@@ -20,6 +20,7 @@ public class CreateCommandPersonResponse
         Status = Status.Active,
         CreateAt = DateTime.Now,
         BirthDay = entity.BirthDay,
-        Email = entity.Email
+        Email = entity.Email,
+        Id = entity.Id
     };
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ public partial class PersonController
     /// <response code="200">List of values</response>
     /// <response code="500">Internal Server Errror</response>
     [HttpGet]
-    [ProducesResponseType(typeof(GetPersonQueryResponse), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(IEnumerable<GetPersonQueryResponse>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ResponseError<ErrorDetail>), (int)HttpStatusCode.InternalServerError)]
     public async Task<IActionResult> GetPersonsV1Async(
         [FromQuery] string name,

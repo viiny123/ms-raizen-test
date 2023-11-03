@@ -31,7 +31,11 @@ public class UpdatePersonCommandHandler : HandlerBase<UpdatePersonCommand>
             return Result;
         }
 
-        entity = request;
+        entity.PostalCode = request.PostalCode;
+        entity.Email = request.Email;
+        entity.Name = request.Name;
+        entity.BirthDay = request.BirthDay;
+        entity.Status = request.Status;
 
         await _personRepository.UpdateAsync(entity);
         await _unitOfWork.SaveAsync();

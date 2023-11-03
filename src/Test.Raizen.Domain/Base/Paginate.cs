@@ -31,6 +31,7 @@ public class Paginate<T> where T : class
         PageNumber = pageNumber;
         TotalCount = totalCount;
         TotalPage = totalPage;
+        PageData = items;
     }
 
     public int GetSkip()
