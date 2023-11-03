@@ -20,6 +20,7 @@ public static class ServicesConfiguration
         services.ConfigureDatabases(configuration);
         services.ConfigureTestModule(configuration);
         services.ConfigureSwagger();
+        services.ConfigureHttpClients(configuration);
 
         return services;
     }

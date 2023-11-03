@@ -10,11 +10,11 @@ public class GetValueByIdQueryValidation : AbstractValidator<GetPersonByIdQuery>
     {
         RuleFor(r => r)
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.BaseInvalidRequest);
+            .WithErrorCatalog(ErrorCatalog.TestError.BaseInvalidRequest);
 
         RuleFor(r => r.Id)
             .NotEmpty()
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.GetByIdNotFound);
+            .WithErrorCatalog(ErrorCatalog.TestError.GetByIdNotFound);
     }
 }

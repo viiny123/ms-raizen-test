@@ -6,7 +6,7 @@ namespace Test.Raizen.Application.Base.Error;
 public static class ErrorCatalog
 {
     [ExcludeFromCodeCoverage]
-    public static class Person
+    public static class TestError
     {
 
         #region Base
@@ -15,14 +15,19 @@ public static class ErrorCatalog
             ("RAIZEN-STANDAR-01", "Invalid request");
 
         #endregion Base
-        
+
 
         #region GetById
 
         public static ErrorCatalogEntry GetByIdNotFound =>
             ("RAIZEN-GETBYID-01", "[id] not found");
 
-        #endregion Get
+        #endregion
+
+        #region Get
+        public static ErrorCatalogEntry GetByPostalCodeIsNullOrEmpty =>
+            ("RAIZEN-GET-01", "[postalCode] parameter cant be null or empty");
+        #endregion
 
         #region Craete
 
@@ -38,7 +43,7 @@ public static class ErrorCatalog
         public static ErrorCatalogEntry CreatePostalCodeIsNullOrEmpty =>
             ("RAIZEN-CREATE-04", "[postalCode] parameter cant be null or empty");
 
-        #endregion Create
+        #endregion
 
         #region Delete
         public static ErrorCatalogEntry DeleteIdIsNullOrEmpty =>

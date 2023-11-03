@@ -21,7 +21,7 @@ public class GetPersonByIdQueryHandler : HandlerBase<GetPersonByIdQuery>
 
         if (entity is null)
         {
-            Result.AddError(ErrorCatalog.Person.GetByIdNotFound, ErrorCode.NotFound);
+            Result.AddError(ErrorCatalog.TestError.GetByIdNotFound, ErrorCode.NotFound);
 
             return Result;
         }

@@ -10,6 +10,6 @@ public class UpdateCommandValidation : AbstractValidator<UpdatePersonCommand>
     {
         RuleFor(r => r)
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.BaseInvalidRequest);
+            .WithErrorCatalog(ErrorCatalog.TestError.BaseInvalidRequest);
     }
 }

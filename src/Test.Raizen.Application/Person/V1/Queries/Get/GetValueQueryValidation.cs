@@ -10,6 +10,6 @@ public class GetValueQueryValidation : AbstractValidator<GetPersonQuery>
     {
         RuleFor(r => r)
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.BaseInvalidRequest);
+            .WithErrorCatalog(ErrorCatalog.TestError.BaseInvalidRequest);
     }
 }

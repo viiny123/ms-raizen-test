@@ -10,26 +10,26 @@ public class CreateCommandValidation : AbstractValidator<CreatePersonCommand>
     {
         RuleFor(r => r)
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.BaseInvalidRequest);
+            .WithErrorCatalog(ErrorCatalog.TestError.BaseInvalidRequest);
 
         RuleFor(r => r.Name)
             .NotEmpty()
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.CreateNameIsNullOrEmpty);
+            .WithErrorCatalog(ErrorCatalog.TestError.CreateNameIsNullOrEmpty);
 
         RuleFor(r => r.Email)
             .NotEmpty()
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.CreateEmailIsNullOrEmpty);
+            .WithErrorCatalog(ErrorCatalog.TestError.CreateEmailIsNullOrEmpty);
 
         RuleFor(r => r.BirthDay)
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.CreateBirthDayIsNull);
+            .WithErrorCatalog(ErrorCatalog.TestError.CreateBirthDayIsNull);
 
         RuleFor(r => r.PostalCode)
             .NotEmpty()
             .NotNull()
-            .WithErrorCatalog(ErrorCatalog.Person.CreateEmailIsNullOrEmpty);
+            .WithErrorCatalog(ErrorCatalog.TestError.CreateEmailIsNullOrEmpty);
 
     }
 }
