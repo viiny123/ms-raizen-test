@@ -13,7 +13,7 @@ namespace Test.Raizen.API.Controllers.Person.V1;
 public partial class PersonController
 {
     /// <summary>
-    /// Get values
+    /// Get persons
     /// </summary>
     /// <param name="name"></param>
     /// <param name="email"></param>

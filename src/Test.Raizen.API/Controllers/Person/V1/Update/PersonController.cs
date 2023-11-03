@@ -12,7 +12,7 @@ namespace Test.Raizen.API.Controllers.Person.V1;
 public partial class PersonController
 {
     /// <summary>
-    /// Update value
+    /// Update person
     /// </summary>
     /// <param name="id">Unique identifier of Person</param>
     /// <param name="request"></param>

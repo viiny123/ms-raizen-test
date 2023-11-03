@@ -23,7 +23,7 @@ public partial class PersonController
     [ProducesResponseType(typeof(ResponseError<ErrorDetail>), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ResponseError<ErrorDetail>), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ResponseError<ErrorDetail>), (int)HttpStatusCode.InternalServerError)]
-    public async Task<IActionResult> GetValueByIdV1Async([FromRoute] Guid id)
+    public async Task<IActionResult> GetPersonByIdV1Async([FromRoute] Guid id)
     {
         var queryRequest = new GetPersonByIdQuery(id);
         var result = await _mediator.Send(queryRequest);

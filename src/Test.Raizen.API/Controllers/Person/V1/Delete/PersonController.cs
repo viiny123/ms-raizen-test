@@ -2,19 +2,16 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Test.Raizen.API.Controllers.Person.V1.Update;
 using Test.Raizen.API.Presenters;
 using Test.Raizen.Application.Base.Error;
-using Test.Raizen.Application.Person.V1.Commands.Create;
 using Test.Raizen.Application.Person.V1.Commands.Delete;
-using Test.Raizen.Application.Person.V1.Commands.Update;
 
 namespace Test.Raizen.API.Controllers.Person.V1;
 
 public partial class PersonController
 {
     /// <summary>
-    /// Update value
+    /// Delete Person
     /// </summary>
     /// <param name="id">Unique identifier of Value</param>
     /// <returns></returns>
@@ -25,7 +22,7 @@ public partial class PersonController
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType(typeof(ResponseError<ErrorDetail>), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ResponseError<ErrorDetail>), (int)HttpStatusCode.InternalServerError)]
-    public async Task<IActionResult> UpdateValueV1Async([FromRoute] Guid id)
+    public async Task<IActionResult> DeletePersonV1Async([FromRoute] Guid id)
     {
         var result = await _mediator.Send(new DeletePersonCommand
         {
