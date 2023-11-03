@@ -18,6 +18,10 @@
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+  <ItemGroup>
+    <Folder Include="Adresses\V1\" />
+  </ItemGroup>
+
   </ItemGroup>
 
 

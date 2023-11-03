@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Test.Raizen.Application.Base;
 using Test.Raizen.Application.Services.ViaCep.API;
 
-namespace Test.Raizen.Application.Adresses.Queries.GetByPostalCode;
+namespace Test.Raizen.Application.Adresses.V1.Queries.GetByPostalCode;
 
 public class GetByPostalCodeQueryHandler : HandlerBase<GetByPostalCodeQuery>
 {

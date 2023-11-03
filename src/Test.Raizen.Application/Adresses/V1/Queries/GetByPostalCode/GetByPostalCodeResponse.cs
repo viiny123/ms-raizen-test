@@ -1,6 +1,6 @@
 ﻿using Test.Raizen.Application.Services.ViaCep.API.Responses;
 
-namespace Test.Raizen.Application.Adresses.Queries.GetByPostalCode;
+namespace Test.Raizen.Application.Adresses.V1.Queries.GetByPostalCode;
 
 public class GetByPostalCodeResponse
 {

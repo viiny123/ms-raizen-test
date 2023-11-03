@@ -7,5 +7,5 @@ namespace Test.Raizen.Application.Services.ViaCep.API;
 public interface IViaCepApi
 {
     [Get("/{postalCode}/json/")]
-    public Task<AddressResponseApi> GetAddressByPostalCodeAsync(string postalCode);
+    Task<AddressResponseApi> GetAddressByPostalCodeAsync(string postalCode);
 }

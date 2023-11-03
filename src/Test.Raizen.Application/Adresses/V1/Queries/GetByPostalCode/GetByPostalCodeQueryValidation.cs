@@ -2,7 +2,7 @@
 using Test.Raizen.Application.Base.Error;
 using Test.Raizen.Application.Base.Extension;
 
-namespace Test.Raizen.Application.Adresses.Queries.GetByPostalCode;
+namespace Test.Raizen.Application.Adresses.V1.Queries.GetByPostalCode;
 
 public class GetByPostalCodeQueryValidation : AbstractValidator<GetByPostalCodeQuery>
 {

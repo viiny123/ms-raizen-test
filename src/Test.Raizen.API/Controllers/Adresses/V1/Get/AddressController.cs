@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Test.Raizen.API.Presenters;
-using Test.Raizen.Application.Adresses.Queries.GetByPostalCode;
+using Test.Raizen.Application.Adresses.V1.Queries.GetByPostalCode;
 using Test.Raizen.Application.Base.Error;
 
 namespace Test.Raizen.API.Controllers.Adresses.V1;
